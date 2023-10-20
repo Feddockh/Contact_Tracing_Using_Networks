@@ -1,0 +1,20 @@
+classdef AccessPoint
+    properties (Access = private)
+        X
+        Y
+        Sensitivity
+    end
+    methods
+        function obj = MyClass(x, y, sensitivity)
+            if nargin > 0
+                obj.X = x;
+                obj.Y = y;
+                obj.Sensitivity = sensitivity;
+            end
+        end
+        
+        function x(obj)
+            disp(['Value is: ', num2str(obj.Value)]);
+        end
+    end
+end
