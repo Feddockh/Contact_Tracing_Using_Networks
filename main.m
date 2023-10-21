@@ -10,8 +10,8 @@ user_positions = data_generator(size, num_people, time);
 % Take in user input for placement of APs
 ap1 = AccessPoint(10, 10, -50);
 
-
-for t = 1:1
+contacts = [];
+for t = 1:time
 
     % Get a list of the user's info at time t
     users = [];
@@ -42,14 +42,14 @@ for t = 1:1
     end
 
     % Contact list
-    contacts = []
     for i = 1:num_people
-        for j = i:num_people
-            if (abs(distances(i) - distances(j)) < 1)
-                contacts = 
-
-
-
+        for j = (i+1):num_people
+            if (abs(distances(i) - distances(j)) < 5)
+                confidence = 1/(2*pi*(distances(i)/2));
+                contacts = [contacts; users(i).getID(), users(j).getID(), confidence];
+            end
+        end
+    end
 end
 
 % Compute the path loss between the users and the APs
