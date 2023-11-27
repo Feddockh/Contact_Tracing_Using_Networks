@@ -9,7 +9,7 @@ num_people = 4;
 timesteps = 10;
 
 % Get the true (simulated) user information
-users = data_generator(space, num_people, timesteps);
+users = data_generator(dims, num_people, timesteps);
 
 % Take in user input for placement of APs
 access_points = [AccessPoint(10, 10, -100)];
@@ -36,7 +36,7 @@ for t = 1:timesteps
         while (isempty(pCoordinates1) && apID <= length(access_points))
 
             % Compute the potential coordinates
-            pCoordinates1 = coordinateCalc(users(userID), access_points(apID), space, t);
+            pCoordinates1 = coordinateCalc(users(userID), access_points(apID), dims, t);
         
             % Increment the access point ID counter
             apID = apID + 1;
@@ -46,7 +46,7 @@ for t = 1:timesteps
         for i = apID:length(access_points)
     
             % Determine the potential coordinates
-            pCoordinates2 = coordinateCalc(users(userID), access_points(i), space, t);
+            pCoordinates2 = coordinateCalc(users(userID), access_points(i), dims, t);
 
             % Remove non-overlapping coordinates from the original list
             if (~isempty(pCoordinates2))
@@ -157,7 +157,7 @@ for i = 1:length(contacts)
     for j = 1:length(contactedUsers)
         if (trace_userID == contactedUsers(j).getID())
 
-            % Retrieve the certainties that the user is at that location
+            % Retrieve the centrainties that the user is at that location
             certainties = contacts(i).getCertainty();
 
             % If the traced user is in the collision, then add the collision
@@ -174,7 +174,8 @@ for i = 1:length(contacts)
                     % certainties that either of the users are at that coordinate
                     certainty = certainties(j) * certainties(k);
 
-                    % Add the certainty of this contact to the overall certainty
+                    % Add the certainty of this contact to the overall
+                    % certainty
                     perContact(userID) = perContact(userID) + certainty/timesteps;
                 end
             end

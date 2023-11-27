@@ -21,7 +21,7 @@ function [pCoordinates] = coordinateCalc(user, access_point, size, timestep)
     r = compute_distance(f, n, path_loss);
 
     % find the coordinates within the plane that lie on the circle
-    tolerance = 0.01;
+    tolerance = 0.0001;
     for y = 1:size
         for x = 1:size
             d = sqrt((x - access_point.getX())^2 + (y - access_point.getY())^2);
