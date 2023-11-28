@@ -8,8 +8,7 @@ function[accessPoints] = visualization(dim)
     colormap([1 1 1; 1 0 0; 0 1 0; 0 0 1]); % Black, Red, Green, Blue
     
     accessPoints = {};
-    % also show users
-    Users = users;
+    Users = users; % NOTE: Not sure what this is for but this is giving me errors
     
     imagesc(r);
     axis xy;
@@ -17,7 +16,7 @@ function[accessPoints] = visualization(dim)
     % Update the plot in a loop
     for i = 1:100
         % Update the image data
-        [x,y] = ginput(1);
+        [x,y] = ginput(1); % NOTE: Not sure how to exit the input window?
         x = round(x);
         y = round(y);
     
@@ -25,8 +24,6 @@ function[accessPoints] = visualization(dim)
         accessPoints{end+1} = obj;
         
         r(y, x) = 3;
-        
-        
         
         % Force the figure to update
         imagesc(r);

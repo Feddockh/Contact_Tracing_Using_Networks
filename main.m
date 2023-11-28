@@ -12,7 +12,8 @@ timesteps = 10;
 users = data_generator(space, num_people, timesteps);
 
 % Take in user input for placement of APs
-access_points = [AccessPoint(10, 10, -100)];
+% access_points = [AccessPoint(10, 10, -100)];
+access_points = visualization(space);
 
 % Create a record of contacts
 contacts = [];
