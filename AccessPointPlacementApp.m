@@ -7,7 +7,7 @@ classdef AccessPointPlacementApp < matlab.apps.AppBase
         UIAxes             matlab.ui.control.UIAxes
         PlaceButton        matlab.ui.control.Button
         CoordinatesLabel   matlab.ui.control.Label
-        AccessPoints       double = zeros(0, 100) % Initialize with an empty matrix for access points
+        AccessPoints       cell = {} % Initialize with an empty matrix for access points
     end
 
 
@@ -19,19 +19,17 @@ classdef AccessPointPlacementApp < matlab.apps.AppBase
             % Allow user to click on the UIAxes to place access points
 
             % Get user input
-            [x, y, z] = ginput(1);
-            x=round(x);
-            y=round(y);
-            z=round(z);
-            
+            [x, y] = ginput(1);
+            sensitivity=0;
+            obj=AccessPoint(x,y,sensitivity);
 
             % Update access points matrix
-            app.AccessPoints = [app.AccessPoints; x, y, z];
-            plot(app.UIAxes, x, y, 'ro', 'MarkerSize', 10);
+            app.AccessPoints{end+1} = obj;
+            %plot(app.UIAxes, x, y, 'ro', 'MarkerSize', 10);
             %plot3(app.UIAxes, x, y, z, 'ro', 'MarkerSize', 10);
-
+            disp('here')
             % Update the coordinates label
-            app.CoordinatesLabel.Text = sprintf('Coordinates: %.2f, %.2f, %.2f', x, y, z);
+            app.CoordinatesLabel.Text = sprintf('Coordinates: %.2f, %.2f ,%.2f', x, y ,sensitivity);
         end
     end
 
@@ -54,7 +52,17 @@ classdef AccessPointPlacementApp < matlab.apps.AppBase
 % Display access point locations when closing the app
     methods (Access = private)
         function UIFigureCloseRequest(app, ~)   
+
             disp(app.AccessPoints);
+            for i = 1:length(app.AccessPoints)
+                currentAccessPoint = app.AccessPoints{i};
+                x=getX(currentAccessPoint);
+                y=getY(currentAccessPoint);
+                sensitivity=getSensitivity(currentAccessPoint);
+
+                fprintf('Access Point %d: X = %d, Y = %d, Sensitivity = %d\n', i, x,y,sensitivity);
+            end
+            
             delete(app.UIFigure);
         end
     end
@@ -115,3 +123,6 @@ classdef AccessPointPlacementApp < matlab.apps.AppBase
         end
     end
 end
+
+
+
