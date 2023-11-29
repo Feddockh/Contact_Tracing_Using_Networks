@@ -9,7 +9,10 @@ num_people = 4;
 timesteps = 10;
 
 % Get the true (simulated) user information
-users = data_generator(space, num_people, timesteps);
+users = data_generator(space, num_people, timesteps,1);
+
+% Display the path of the users
+plotUserPaths(space, users);
 
 % Take in user input for placement of APs
 numPoints = input("How many access points do you want? ");
