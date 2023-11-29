@@ -2,14 +2,15 @@
 % 10/20/2023
 
 clear all;
+close all;
 
 % Set data generation parameters
-space = 20;
+space = 50;
 num_people = 4;
-timesteps = 10;
+timesteps = 30;
 
 % Get the true (simulated) user information
-users = data_generator(space, num_people, timesteps,1);
+users = data_generator(space, num_people, timesteps, 1);
 
 % Display the path of the users
 plotUserPaths(space, users);
@@ -17,6 +18,7 @@ plotUserPaths(space, users);
 % Take in user input for placement of APs
 numPoints = input("How many access points do you want? ");
 access_points = visualization(space, numPoints);
+% access_points = [AccessPoint(10, 10, -50)];
 
 % Create a record of contacts
 contacts = [];
@@ -114,7 +116,7 @@ for t = 1:timesteps
             for j = (i+1):length(users)
 
                 % Record the dimensions of the second coordinate array
-                dims2 = size(pCoordinates{i});
+                dims2 = size(pCoordinates{j});
 
                 % Iterate through each row of the second coordinate array
                 for row2 = 1:dims2(1)
@@ -132,7 +134,6 @@ for t = 1:timesteps
             % If there was a collision, then add to the open list and make
             % a contact point
             if (length(usersInCollision) > 1)
-                display(coordinate);
                 contacts = [contacts, ContactPoint(usersInCollision, coordinate, certainty, t)];
                 openList = [openList; coordinate];
             end
