@@ -10,7 +10,7 @@ function [pCoordinates] = coordinateCalc(user, access_point, size, timestep)
     f = 2.4*10^9;
     n = 2;
     path_loss = compute_loss(a, b, f, n);
-    RX_db = user.getTX() - path_loss
+    RX_db = user.getTX() - path_loss;
 
     % Check if the strength is above that required by the access point
     if (RX_db < access_point.getSensitivity())

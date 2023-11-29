@@ -2,7 +2,7 @@ function[access_points] = visualization(dim, numPoints)
     % Generate the X and Y grid arrays using the MESHGRID function.
     r = zeros(dim); % r will represent the input matrix. Current state is for demo purposes.
     
-    sensitivity = -60;
+    sensitivity = -75;
     % Define colormap for different objects
     colormap([1 1 1; 1 0 0; 0 1 0; 0 0 1]); % Black, Red, Green, Blue
     

@@ -10,7 +10,7 @@ num_people = 4;
 timesteps = 30;
 
 % Get the true (simulated) user information
-users = data_generator(space, num_people, timesteps, 1);
+users = data_generator(space, num_people, timesteps, 2);
 
 % Display the path of the users
 plotUserPaths(space, users);
