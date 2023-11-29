@@ -1,7 +1,7 @@
 function [users] = data_generator(size, num_people, timesteps, testcase)
 
     users = [];
-    TX_db = 50; % Predetermined value
+    TX_db = 0; % Predetermined value
     num_people = 4;
 
     for i = 1:num_people
